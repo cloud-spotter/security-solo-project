@@ -14,10 +14,10 @@ jobs:
       - uses: actions/checkout@v2
         with:
           ref: main
-      - name: Building Docker Insecure Acebook Image
-        run: docker build --tag insecure-acebook:latest .
-      - name: Launching the Insecure Acebook app
-        run: docker run -d -p 5000:5000 insecure-acebook
+      - name: Building Docker Login Form Image
+        run: docker build --tag login-form:latest .
+      - name: Launching the Login Form app
+        run: docker run -d -p 5000:5000 login-form
 
       - name: OWASP ZAP
         ### Swap the actions used if you want a more comprehensive DAST analysis of your app :)
