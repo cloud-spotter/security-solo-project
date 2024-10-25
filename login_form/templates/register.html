@@ -1,29 +1,40 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-  <nav>
-    <h1>Sign up</h1>
-    </ul>
-  </nav>
-  {% for message in get_flashed_messages() %}
-    <div class="flash">{{ message }}</div>
-  {% endfor %}
-  <section class="content">
-    <form method="post">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <nav>
+      <h1>Sign up</h1>
+    </nav>
+    {% for message in get_flashed_messages() %}
+      <div class="flash">{{ message }}</div>
+    {% endfor %}
+    <section class="content">
+      <form method="post">
         <label for="username">Username</label>
         <input name="username" id="username" required>
+        <small class="help-text">Username can only contain letters, numbers, and underscore.</small>
         <label for="password">Password</label>
         <input type="password" name="password" id="password" required>
+        <div class="password-requirements">
+          <h4>Password must meet the following requirements:</h4>
+          <ul>
+            <li>At least 8 characters long</li>
+            <li>At least one uppercase letter (A-Z)</li>
+            <li>At least one lowercase letter (a-z)</li>
+            <li>At least one number (0-9)</li>
+            <li>At least one special character (!@#$%^&amp;*(),.?\":{}|</li>
+            <li>Cannot contain: &lt; &gt; </li>
+          </ul>
+        </div>
         <input type="submit" value="Register">
       </form>
-  </section>  
-</body>
+    </section>
+  </body>
 </html>
 
 
