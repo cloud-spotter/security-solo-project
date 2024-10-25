@@ -36,6 +36,10 @@ def create_app(test_config=None):
     @app.after_request
     def add_security_headers(resp):
         resp.headers['Content-Security-Policy']='default-src \'self\''
+        resp.headers['X-Frame-Options'] = 'SAMEORIGIN'
+        resp.headers['X-Content-Type-Options'] = 'nosniff'
+        resp.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+        resp.headers['X-XSS-Protection'] = '1; mode=block'
         return resp
 
     return app
