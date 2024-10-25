@@ -7,8 +7,7 @@ class User():
   def create(cls, username, password):
     db = get_db()
     db.execute(
-      "INSERT INTO user (username, password) VALUES ('"+username+"', '"+password+"')",
-      ()
+      "INSERT INTO user (username, password) VALUES (?, ?)", (username, password) # Use parameterised queries rather than string concatenation (for security)
     )
     db.commit()
 
@@ -16,7 +15,7 @@ class User():
   def find_with_credentials(cls, username, password):
     db = get_db()
     user = db.execute(
-      "SELECT id, username, password FROM user WHERE username = '" + username + "' AND password = '" + password + "'"
+      "SELECT id, username, password FROM user WHERE username = ? AND password = ?", (username, password) # Use parameterised queries rather than string concatenation (for security)
     ).fetchone()
     print(user)
     if user:
