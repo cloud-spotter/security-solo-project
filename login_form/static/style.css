@@ -132,3 +132,28 @@ input[type=submit] {
    align-self: start;
    min-width: 10em;
 }
+
+.help-text {
+   display: block;
+   color: #666;
+   margin-bottom: 1em;
+   font-size: 0.9em;
+}
+.password-requirements {
+   background: #f8f9fa;
+   padding: 1em;
+   border-radius: 4px;
+   margin: 1em 0;
+}
+.password-requirements h4 {
+   margin-top: 0;
+   color: #333;
+}
+.password-requirements ul {
+   margin-bottom: 0;
+   padding-left: 1.5em;
+}
+.password-requirements li {
+   color: #666;
+   margin: 0.3em 0;
+}
