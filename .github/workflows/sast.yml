@@ -18,19 +18,21 @@ jobs:
           path: "."
           exit_zero: true
 
-  semgrep:
-    runs-on: ubuntu-latest
-    # Skip any PR created by dependabot to avoid permission issues
-    if: (github.actor != 'dependabot[bot]')
+  # Commented out as this is now deprecated
+  # To use this tool you now need to do so via an account & on their website
+  # semgrep:
+  #   runs-on: ubuntu-latest
+  #   # Skip any PR created by dependabot to avoid permission issues
+  #   if: (github.actor != 'dependabot[bot]')
 
-    steps:
-      - uses: actions/checkout@v2
-      - name: Semgrep - Lightweight SAST to find bugs and enfource code standards
-        uses: returntocorp/semgrep-action@v1
-        with:
-          config: >- # more at semgrep.dev/explore
-            p/security-audit
-            p/secrets
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Semgrep - Lightweight SAST to find bugs and enfource code standards
+  #       uses: returntocorp/semgrep-action@v1
+  #       with:
+  #         config: >- # more at semgrep.dev/explore
+  #           p/security-audit
+  #           p/secrets
 
   depcheck:
     runs-on: ubuntu-latest
@@ -41,7 +43,7 @@ jobs:
         uses: dependency-check/Dependency-Check_Action@main
         id: Depcheck
         with:
-          project: 'insecure-acebook'
+          project: 'login-form'
           path: '.'
           format: 'HTML'
           args: >
