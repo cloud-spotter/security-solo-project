@@ -15,6 +15,7 @@
     {% endfor %}
     <section class="content">
       <form method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
         <label for="username">Username</label>
         <input name="username" id="username" required>
         <small class="help-text">Username can only contain letters, numbers, and underscore.</small>
