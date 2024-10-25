@@ -15,11 +15,31 @@ def index():
     return render_template('index.html')
 
 def validate_username(username):
-    # Basic validation
     if not username or len(username) < 3 or len(username) > 50:
         return False
     # Only allow letters, numbers, and underscore
     return username.replace('_', '').isalnum()
+
+def validate_password(password):
+    # Check minimum length
+    if len(password) < 8:
+        return "Password must be at least 8 characters long"
+    
+    if not any(char.isdigit() for char in password):
+        return "Password must contain at least one number"
+    
+    if not any(char.isupper() for char in password):
+        return "Password must contain at least one uppercase letter"
+    
+    if not any(char.islower() for char in password):
+        return "Password must contain at least one lowercase letter"
+    
+    # Check for at least one special character (no <> allowed)
+    special_chars = "!@#$%^&*(),.?\":{}|"
+    if not any(char in special_chars for char in password):
+        return "Password must contain at least one special character"
+    
+    return None
 
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
@@ -34,6 +54,11 @@ def register():
             error = 'Username can only contain letters, numbers, and underscore.'
         elif not password:
             error = 'Password is required.'
+        else:
+            # Check password validity
+            password_error = validate_password(password)
+            if password_error:
+                error = password_error
         
         if error is None:
             try:
