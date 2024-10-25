@@ -34,10 +34,15 @@ def validate_password(password):
     if not any(char.islower() for char in password):
         return "Password must contain at least one lowercase letter"
     
-    # Check for at least one special character (no <> allowed)
-    special_chars = "!@#$%^&*(),.?\":{}|"
-    if not any(char in special_chars for char in password):
+    # Explicit list of allowed special characters
+    safe_special_chars = set("!@#$%^&*(),.?\":{}")
+    if not any(char in safe_special_chars for char in password):
         return "Password must contain at least one special character"
+    
+    # Check for disallowed characters
+    disallowed_chars = "<>|;'`\\/"  # Added / and \ to prevent path traversal
+    if any(char in disallowed_chars for char in password):
+        return f"Password cannot contain the following characters: {disallowed_chars}"
     
     return None
 
