@@ -14,6 +14,13 @@ bp = Blueprint('auth', __name__, url_prefix='/')
 def index():
     return render_template('index.html')
 
+def validate_username(username):
+    # Basic validation
+    if not username or len(username) < 3 or len(username) > 50:
+        return False
+    # Only allow letters, numbers, and underscore
+    return username.replace('_', '').isalnum()
+
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
     if request.method == 'POST':
@@ -21,14 +28,20 @@ def register():
         password = request.form['password']
 
         error = None
-
         if not username:
             error = 'Username is required.'
-
+        elif not validate_username(username):
+            error = 'Username can only contain letters, numbers, and underscore.'
+        elif not password:
+            error = 'Password is required.'
+        
         if error is None:
-            User.create(username, password)
-            return redirect(url_for('auth.login'))
-
+            try:
+                User.create(username, password)
+                return redirect(url_for('auth.login'))
+            except Exception as e:
+                error = f"User {username} is already registered."
+                
         flash(error)
 
     return render_template('register.html')
