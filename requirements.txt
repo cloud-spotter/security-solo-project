@@ -5,3 +5,4 @@ seleniumbase==4.15.13
 setuptools==68.0.0
 Werkzeug==2.3.6
 bandit==1.7.5
+flask-wtf==1.2.1
